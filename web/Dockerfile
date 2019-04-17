@@ -12,4 +12,4 @@ RUN \
  apk --purge del .build-deps
 RUN chown -R flask:flaskgroup /home/flask
 USER flask
-ENTRYPOINT ["/usr/local/bin/gunicorn", "--bind", ":8000", "visit-counter:webapp", "--reload", "--workers", "16"]
+ENTRYPOINT ["/usr/local/bin/gunicorn", "--bind", ":8000", "cloud:app", "--reload", "--workers", "16"]
