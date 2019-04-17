@@ -81,8 +81,8 @@ services:
 
    # Pass postgres environment variables
    environment:
-     POSTGRES_PASSWORD: admin
-     POSTGRES_DB: password
+     POSTGRES_PASSWORD: password
+     POSTGRES_DB: visit_counter
 
    # Expose port 5432 to other docker containers
    expose:
