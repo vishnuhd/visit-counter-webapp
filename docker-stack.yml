@@ -3,8 +3,6 @@ services:
 
   redis:
     image: redis:alpine
-    networks:
-      - backend
     deploy:
       replicas: 1
       update_config:
@@ -20,21 +18,11 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: visit_counter
-    networks:
-      - backend
     deploy:
-      placement:
-        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
-    expose:
-      - "5432"
   flaskapp:
     image: vishnuhdadhich/visit-counter-web:latest
-    expose:
-      - "8000"
-    networks:
-      - frontend
     depends_on:
       - redis
       - postgres
@@ -55,8 +43,6 @@ services:
     image: vishnuhdadhich/visit-counter-nginx:latest
     ports:
       - "80:80"
-    networks:
-      - frontend
     depends_on:
       - flaskapp
     deploy:
@@ -76,7 +62,3 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
-
-networks:
-  frontend:
-  backend:
