@@ -7,7 +7,7 @@ services:
  # defining our flask web application
  flaskapp:
 
-   # build the Dockerfile that is in the web directory: http://bit.ly/2BpBPXq
+   # build the Dockerfile that is in the web directory
    build: ./web
 
    # always restart the container regardless of the exit status; try and restart the container indefinitely
@@ -17,7 +17,7 @@ services:
    expose:
      - "8000"
 
-   # mount the web directory (http://bit.ly/2BbJO6k) within the container at /home/flask/app/web
+   # mount the web directory within the container at /home/flask/app/web
    volumes:
      - ./web:/home/flask/app/web
 
@@ -53,7 +53,7 @@ services:
  # defining the redis NGINX forward proxy container for our web application
  nginx:
 
-   # build the nginx Dockerfile: http://bit.ly/2kuYaIv
+   # build the nginx Dockerfile
    build: nginx/
    restart: always
 
