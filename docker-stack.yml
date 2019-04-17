@@ -19,14 +19,12 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: visit_counter
     deploy:
+      replicas: 1
       restart_policy:
         condition: on-failure
   flaskapp:
     image: vishnuhdadhich/visit-counter-web:latest
     depends_on:
-      - redis
-      - postgres
-    links:
       - redis
       - postgres
     volumes:
