@@ -13,8 +13,8 @@ services:
   postgres:
     image: postgres:alpine
     volumes:
-      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./postgres/data:/var/lib/postgresql/data
+      - "./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "./postgres/data:/var/lib/postgresql/data"
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: visit_counter
@@ -28,7 +28,7 @@ services:
       - redis
       - postgres
     volumes:
-      - ./web:/home/flask/app/web
+      - "./web:/home/flask/app/web"
     environment:
       FLASK_DEBUG: 1
     deploy:
