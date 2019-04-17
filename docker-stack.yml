@@ -1,0 +1,82 @@
+version: "3"
+services:
+
+  redis:
+    image: redis:alpine
+    networks:
+      - backend
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  postgres:
+    image: postgres:alpine
+    volumes:
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD: password
+      - POSTGRES_DB: visit_counter
+    networks:
+      - backend
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+    expose:
+      - "5432"
+  flaskapp:
+    image: vishnuhdadhich/visit-counter-web:latest
+    expose:
+      - "8000"
+    networks:
+      - frontend
+    depends_on:
+      - redis
+      - postgres
+    links:
+      - redis
+      - postgres
+    volumes:
+      - ./web:/home/flask/app/web
+    environment:
+      FLASK_DEBUG: 1
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+  nginx:
+    image: vishnuhdadhich/visit-counter-nginx:latest
+    ports:
+      - 80:80
+    networks:
+      - frontend
+    depends_on:
+      - flaskapp
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+      restart_policy:
+        condition: on-failure
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  frontend:
+  backend:
