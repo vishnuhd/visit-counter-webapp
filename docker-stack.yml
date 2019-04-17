@@ -18,8 +18,8 @@ services:
       - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgres/data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD: "password"
-      - POSTGRES_DB: "visit_counter"
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: visit_counter
     networks:
       - backend
     deploy:
@@ -54,7 +54,7 @@ services:
   nginx:
     image: vishnuhdadhich/visit-counter-nginx:latest
     ports:
-      - 80:80
+      - "80:80"
     networks:
       - frontend
     depends_on:
