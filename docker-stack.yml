@@ -11,10 +11,9 @@ services:
       restart_policy:
         condition: on-failure
   postgres:
-    image: postgres:alpine
+    image: vishnuhdadhich/visit-counter-postgres:latest
     volumes:
-      - "./postgres/data/init.sql:/docker-entrypoint-initdb.d/init.sql"
-      - "./postgres/data:/var/lib/postgresql/data"
+      - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: visit_counter    
@@ -28,7 +27,7 @@ services:
       - redis
       - postgres
     volumes:
-      - "./web:/home/flask/app/web"
+      - webdata:/home/flask/app/web
     environment:
       FLASK_DEBUG: 1
     deploy:
@@ -60,3 +59,6 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager]
+volumes:
+  pgdata:
+  webdata:
