@@ -4,7 +4,7 @@ RUN addgroup flask flaskgroup
 RUN echo "flask ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN mkdir -p /home/flask/app/web
 WORKDIR /home/flask/app/web
-COPY requirements.txt /home/flask/app/web
+COPY . /home/flask/app/web
 RUN \
  apk add --no-cache postgresql-libs && \
  apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
