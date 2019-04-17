@@ -13,7 +13,7 @@ services:
   postgres:
     image: postgres:alpine
     volumes:
-      - "./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "./postgres/data/init.sql:/docker-entrypoint-initdb.d/init.sql"
       - "./postgres/data:/var/lib/postgresql/data"
     environment:
       POSTGRES_PASSWORD: password
