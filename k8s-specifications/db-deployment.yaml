@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: db
+  namespace: visit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - image: vishnuhdadhich/visit-counter-postgres:latest
+        name: db
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: pgdata
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "password"
+        - name: POSTGRES_DB
+          value: "visit_counter"
+      volumes:
+      - name: pgdata
+        emptyDir: {} 
