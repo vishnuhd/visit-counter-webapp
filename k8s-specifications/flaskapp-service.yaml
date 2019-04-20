@@ -5,8 +5,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: "flaskapp-service"
-    port: 8070
+  - name: "flaskapp"
+    port: 8000
     targetPort: 8000
   selector:
     app: flaskapp

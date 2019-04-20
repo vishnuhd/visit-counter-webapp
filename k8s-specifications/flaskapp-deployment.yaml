@@ -12,12 +12,6 @@ spec:
       containers:
       - image: vishnuhdadhich/visit-counter-web:latest
         name: flaskapp
-        volumeMounts:
-        - mountPath: /home/flask/app/web
-          name: webdata
         env:
         - name: FLASK_DEBUG
           value: "1"
-      volumes:  
-      - name: webdata
-        emptyDir: {} 
