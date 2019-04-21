@@ -1,14 +1,28 @@
 # visit-counter-webapp
 Simple Website visit counter app with NGINX proxy -> Flask -> {redis,postgres}, containerized with Docker.
 
-# For Docker Compose Mode
+For demo, clone the repo and select one of below Mode   
 
-$ git clone https://github.com/vishnuhd/visit-counter-webapp.git  
-$ cd visit-counter-webapp  
-$ docker-compose up  
+```
+$ git clone https://github.com/vishnuhd/visit-counter-webapp.git   
+$ cd visit-counter-webapp   
+```
+
+# For Docker Compose Mode
+```
+$ docker-compose up   
+```
 
 # For Docker Swarm Mode
+```  
+$ docker stack deploy --compose-file docker-stack.yml mywebapp   
+```
 
-$ git clone https://github.com/vishnuhd/visit-counter-webapp.git  
-$ cd visit-counter-webapp  
-$ docker stack deploy --compose-file docker-stack.yml mywebapp  
+# For Kubernetes Deployment Mode
+``` 
+$ kubectl create -f k8-deployment   
+```
+OR
+``` 
+$ kubectl create -f k8-specifications/   
+```
