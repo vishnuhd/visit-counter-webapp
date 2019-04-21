@@ -1,7 +1,7 @@
 # visit-counter-webapp
-Simple Website visit counter app with NGINX proxy -> Flask -> {redis,postgres}, containerized with Docker.
+Simple website visit counter app with NGINX proxy -> Flask -> {redis,postgres}, containerized with Docker.
 
-For demo, clone the repo and select one of below Mode   
+For demo, clone the repo and select one of below Modes   
 
 ```
 $ git clone https://github.com/vishnuhd/visit-counter-webapp.git   
