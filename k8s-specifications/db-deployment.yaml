@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: db
+  name: postgres
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: db
+        app: postgres
     spec:
       containers:
       - image: vishnuhdadhich/visit-counter-postgres:latest
-        name: db
+        name: postgres
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: pgdata
